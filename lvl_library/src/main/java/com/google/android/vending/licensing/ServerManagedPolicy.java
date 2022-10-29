@@ -297,4 +297,13 @@ public class ServerManagedPolicy implements Policy {
         return results;
     }
 
+    public void resetPolicy() {
+        mPreferences.putString(PREF_LAST_RESPONSE, Integer.toString(Policy.RETRY));
+        setRetryUntil(DEFAULT_RETRY_UNTIL);
+        setMaxRetries(DEFAULT_MAX_RETRIES);
+        setRetryCount(Long.parseLong(DEFAULT_RETRY_COUNT));
+        setValidityTimestamp(DEFAULT_VALIDITY_TIMESTAMP);
+        mPreferences.commit();
+    }
+
 }

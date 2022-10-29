@@ -88,9 +88,11 @@ public class MainActivity extends Activity {
         // Library calls this when it's done.
         mLicenseCheckerCallback = new MyLicenseCheckerCallback();
         // Construct the LicenseChecker with a policy.
+        ServerManagedPolicy policy = new ServerManagedPolicy(this,
+                new AESObfuscator(SALT, getPackageName(), deviceId));
+        policy.resetPolicy();
         mChecker = new LicenseChecker(
-            this, new ServerManagedPolicy(this,
-            new AESObfuscator(SALT, getPackageName(), deviceId)),
+            this, policy,
             BASE64_PUBLIC_KEY);
         doCheck();
     }
